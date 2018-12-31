@@ -1,0 +1,301 @@
+﻿     #region fields
+        PlotView _graph = null;
+        PlotModel _model = null;
+        IDictionary<string, LineSeries> _seriesList;
+        #endregion
+
+        #region events
+        protected override void ProtectedPropertyChangedHandlerAsync(object sender, PropertyChangedEventArgs e)
+        {
+            try
+            {
+                Log.Info($"waveform prop change: {e.PropertyName}");
+                switch (e.PropertyName)
+                {
+                    case nameof(CurrentLapNumber):
+                        {
+                            DisplayLap(CurrentLap);
+                            break;
+                        }
+                    case nameof(CurrentFrameIndex):
+                        {
+                            DisplayFrameIndicator(CurrentFrameIndex);
+                            break;
+                        }
+                    case nameof(Laps):
+                        {
+                            DisplayLap(CurrentLap);
+                            break;
+                        }
+                    case nameof(Session):
+                        {
+                            DisplayLap(CurrentLap);
+                            break;
+                        }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler(ex);
+            }
+        }
+        #endregion
+
+        #region ctor/load
+        public WaveformDisplay()
+            : base()
+        {
+            InitializeComponent();
+
+            FormDisplayInfo.DisplayType = DisplayTypes.Waveform;
+        }
+
+        public WaveformDisplay(
+            IServiceProvider serviceProvider,
+            log4net.ILog log,
+            iRacingTelemetryOptions options)
+          : base(
+            serviceProvider,
+            log,
+            options,
+            DisplayTypes.Waveform)
+        {
+            InitializeComponent();
+        }
+
+        protected override void TelemetryForm_Load(object sender, EventArgs e)
+        {
+            base.TelemetryForm_Load(sender, e);
+
+            _graph = new OxyPlot.WindowsForms.PlotView() { Name = "plot1" };
+            _graph.Size = new Size(200, 200);
+            _graph.Location = new Point(8, 8);
+            _graph.Dock = DockStyle.Fill;
+
+            //            _graph.BackColor = Color.Transparent;
+
+            //_model = GetPlotModel();
+
+            //_graph.Model = _model;
+
+            this.Controls.Add(_graph);
+
+            //DisplayLap(CurrentLap);
+        }
+        #endregion
+
+        #region protected
+        protected virtual PlotModel GetPlotModel()
+        {
+            var plotModel = new PlotModel();
+            _seriesList = new Dictionary<string, LineSeries>();
+
+            foreach (IFieldDisplayInfo fieldDisplayInfo in FormDisplayInfo.DisplayFields)
+            {
+                LineSeries series = new LineSeries();
+
+                series.StrokeThickness = fieldDisplayInfo.Thickness;
+
+                series.Color = OxyColor.FromArgb(
+                    (byte)fieldDisplayInfo.ColorA,
+                    (byte)fieldDisplayInfo.ColorR,
+                    (byte)fieldDisplayInfo.ColorG,
+                    (byte)fieldDisplayInfo.ColorB);
+
+                series.Title = fieldDisplayInfo.Key;
+
+                plotModel.Series.Add(series);
+
+                _seriesList.Add(fieldDisplayInfo.Key, series);
+
+                plotModel.Axes.Add(new LinearAxis()
+                {
+                    Position = AxisPosition.Left,
+                    Minimum = fieldDisplayInfo.RangeMin,
+                    Maximum = fieldDisplayInfo.RangeMax,
+                    Title = fieldDisplayInfo.Name,
+                    AxislineThickness = 1,
+                    AxislineStyle = LineStyle.Solid,
+                    AxislineColor = series.Color,
+                    TitleColor = series.Color,
+                    TicklineColor = series.Color,
+                    MajorGridlineColor = series.Color,
+                    AxisDistance = (_seriesList.Count * 40)
+                });
+            }
+
+            // bottom axis
+            plotModel.Axes.Add(new LinearAxis()
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = 0,
+                Maximum = 1,
+                Title = "Lap Distance Percent",
+                AxislineThickness = 1,
+                AxislineStyle = LineStyle.Solid,
+                AxislineColor = OxyColors.SteelBlue,
+                TitleColor = OxyColors.SteelBlue,
+                TicklineColor = OxyColors.SteelBlue,
+                MajorGridlineColor = OxyColors.SteelBlue,
+                MajorStep = .25,
+                MinorStep = .1
+            });
+
+            return plotModel;
+        }
+
+        //protected virtual IDictionary<string, LineSeries> BuildSeriesList()
+        //{
+        //    IDictionary<string, LineSeries> seriesList = new Dictionary<string, LineSeries>();
+
+        //    seriesList.Clear();
+
+        //    foreach (IFieldDisplayInfo fieldDisplayInfo in FormDisplayInfo.DisplayFields)
+        //    {
+        //        var series = BuildSeries(fieldDisplayInfo);
+        //        seriesList.Add(fieldDisplayInfo.Key, series);
+        //    }
+
+        //    return seriesList;
+        //}
+
+        //protected virtual LineSeries BuildSeries(IFieldDisplayInfo fieldDisplayInfo)
+        //{
+        //    LineSeries series = new LineSeries();
+
+        //    series.StrokeThickness = fieldDisplayInfo.Thickness;
+
+        //    series.Color = OxyColor.FromArgb(
+        //        (byte)fieldDisplayInfo.ColorA,
+        //        (byte)fieldDisplayInfo.ColorR,
+        //        (byte)fieldDisplayInfo.ColorG,
+        //        (byte)fieldDisplayInfo.ColorB);
+
+        //    return series;
+        //}
+
+        protected virtual void DisplayLap(ILapInfo lap)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new MethodInvoker(() => { DisplayLap(lap); }));
+            }
+            else
+            {
+                try
+                {
+                    _graph.Model = null;
+
+                    _model = GetPlotModel();
+
+                    if (lap == null)
+                        return;
+
+                    foreach (IFieldDisplayInfo fieldDisplayInfo in FormDisplayInfo.DisplayFields)
+                    {
+                        var series = _seriesList[fieldDisplayInfo.Key];
+                        var field = FieldDefinitions.FirstOrDefault(f => f.Key == fieldDisplayInfo.Key);
+
+                        foreach (IFrame frame in lap.LapFrames.Skip(1))
+                        {
+                            switch (field.DataType)
+                            {
+                                case (Common.irsdk_VarType.irsdk_float):
+                                    {
+                                        var frameValue = frame.GetTelemetryValue<float>(fieldDisplayInfo.Name);
+                                        series.Points.Add(new DataPoint(frame.LapDistPct, frameValue));
+                                        break;
+                                    }
+                                case (Common.irsdk_VarType.irsdk_double):
+                                    {
+                                        var frameValue = frame.GetTelemetryValue<double>(fieldDisplayInfo.Name);
+                                        series.Points.Add(new DataPoint(frame.LapDistPct, frameValue));
+                                        break;
+                                    }
+                                case (Common.irsdk_VarType.irsdk_int):
+                                    {
+                                        var frameValue = frame.GetTelemetryValue<int>(fieldDisplayInfo.Name);
+                                        series.Points.Add(new DataPoint(frame.LapDistPct, frameValue));
+                                        break;
+                                    }
+                            }
+                        }
+
+                        //foreach (DataPoint item in series.Points)
+                        //{
+                        //    Console.WriteLine($"{item.X}:{item.Y}");
+                        //}
+                    }
+                    _graph.Model = _model;
+
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler(ex);
+                }
+            }
+        }
+
+        protected virtual void DisplayFrameIndicator(int frameIdx)
+        {
+
+        }
+
+        protected virtual async Task DisplayFieldSelection()
+        {
+            try
+            {
+                var dialog = new FieldDefinitionsView(ServiceProvider);
+
+                foreach (FieldDisplayInfo displayInfo in FormDisplayInfo.DisplayFields)
+                {
+                    dialog.SelectedFieldDefinitionKeys.Add(displayInfo.Key);
+                }
+
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    await RefreshFieldDisplayData();
+
+                    FieldDisplayInfos.Clear();
+
+                    foreach (string key in dialog.SelectedFieldDefinitionKeys)
+                    {
+                        var displayInfo = dialog.DisplayInfos.FirstOrDefault(d => d.Key == key);
+                        if (displayInfo != null)
+                        {
+                            var existing = FormDisplayInfo.DisplayFields.FirstOrDefault(f => f.Key == displayInfo.Key);
+
+                            if (existing != null)
+                                FormDisplayInfo.DisplayFields.Remove(existing);
+
+                            FormDisplayInfo.DisplayFields.Add((FieldDisplayInfo)displayInfo);
+                        }
+                    }
+
+                    _model = GetPlotModel();
+
+                    _graph.Model = _model;
+
+                    DisplayLap(CurrentLap);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler(ex);
+            }
+        }
+        #endregion
+
+        #region private
+        private async void editFieldsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await DisplayFieldSelection();
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler(ex);
+            }
+        }
+        #endregion

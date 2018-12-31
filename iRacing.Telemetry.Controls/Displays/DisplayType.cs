@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iRacing.Setups
+namespace iRacing.Telemetry.Controls.Displays
 {
-    public class Class1
+    public enum DisplayType
     {
+        LineGraph,
+        LapTimes
     }
 }

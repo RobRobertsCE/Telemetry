@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>0ca31b15-6246-4952-80d5-b195cb0f7f87</ProjectGuid>
+    <ProjectGuid>{0CA31B15-6246-4952-80D5-B195CB0F7F87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>iRacing.Setups</RootNamespace>
@@ -30,24 +30,68 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Adapters\SetupFactory.cs" />
+    <Compile Include="Adapters\SetupRepository.cs" />
+    <Compile Include="Attributes\SystemOfMeasurement.cs" />
+    <Compile Include="Attributes\UnitType.cs" />
+    <Compile Include="Attributes\UnitTypes.cs" />
+    <Compile Include="Attributes\UnitTypeAttribute.cs" />
+    <Compile Include="Models\Alignment.cs" />
+    <Compile Include="Models\AttachableSwayBar.cs" />
+    <Compile Include="Models\Vehicles\Chassis\ModifiedChassis.cs" />
+    <Compile Include="Models\SetupBase.cs" />
+    <Compile Include="Models\Vehicles\Chassis\StockCarChassis.cs" />
+    <Compile Include="Models\CornerValues.cs" />
+    <Compile Include="Models\RideHeights.cs" />
+    <Compile Include="Models\Shock.cs" />
+    <Compile Include="Models\Shocks.cs" />
+    <Compile Include="Models\Springs.cs" />
+    <Compile Include="Models\Tires.cs" />
+    <Compile Include="Models\TrackBar.cs" />
+    <Compile Include="Models\Vehicles\Chassis\TruckArmChassis.cs" />
+    <Compile Include="Models\Weights.cs" />
+    <Compile Include="Models\WheelAlignment.cs" />
+    <Compile Include="Ports\ISetupFactoryT.cs" />
+    <Compile Include="Ports\ISetupRepositoryT.cs" />
+    <Compile Include="Models\Spring.cs" />
+    <Compile Include="Models\SwayBar.cs" />
+    <Compile Include="Models\Tire.cs" />
+    <Compile Include="ServiceCollectionExtensions.cs" />
+    <Compile Include="TruckArmMountPositions.cs" />
+    <Compile Include="Models\Vehicles\LMSC.cs" />
+    <Compile Include="Models\Vehicles\SKMod.cs" />
+    <Compile Include="Models\Vehicles\SLM.cs" />
+    <Compile Include="Models\Vehicles\TourMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\iRacing.Common\iRacing.Common.csproj">
+      <Project>{6e3a441f-52ed-470c-a433-bfd2f31a6b0b}</Project>
+      <Name>iRacing.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

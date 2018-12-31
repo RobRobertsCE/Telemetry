@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8AF86A24-D5EF-4CB6-B7CD-689EEC3C3F5F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iRacing.Telemetry.Controls</RootNamespace>
+    <AssemblyName>iRacing.Telemetry.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Infragistics4.Win.DataVisualization.Shared.v14.2, Version=14.2.20142.2092, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics4.Win.DataVisualization.UltraDataChart.v14.2, Version=14.2.20142.2092, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="Infragistics4.Win.Portable.Core.v14.2, Version=14.2.20142.2092, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics4.Win.UltraWinChart.v14.2, Version=14.2.20142.2092, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\SummaryFieldColumnAttribute.cs" />
+    <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Extensions\EnumExtensionMethods.cs" />
+    <Compile Include="Extensions\FieldSummaryExtensions.cs" />
+    <Compile Include="Factories\LineGraphSeriesFactory.cs" />
+    <Compile Include="HistogramGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HistogramGraph.Designer.cs">
+      <DependentUpon>HistogramGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Default\GenericLineGraphSeries.cs" />
+    <Compile Include="Models\Default\SpeedLineGraphSeries.cs" />
+    <Compile Include="Models\FieldListColumns.cs" />
+    <Compile Include="Models\FrameFieldValues.cs" />
+    <Compile Include="Models\HistogramCorners.cs" />
+    <Compile Include="Models\HistogramModel.cs" />
+    <Compile Include="Models\ILineGraphAxis.cs" />
+    <Compile Include="Models\ILineGraphDataModel.cs" />
+    <Compile Include="Models\LineGraphDataModel.cs" />
+    <Compile Include="Models\SeriesMapper.cs" />
+    <Compile Include="Models\TelemetryValues.cs" />
+    <Compile Include="Models\WaveformDisplayInfo.cs" />
+    <Compile Include="TelemetryLineGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TelemetryLineGraph.Designer.cs">
+      <DependentUpon>TelemetryLineGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DisplaySeriesSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DisplaySeriesSettings.Designer.cs">
+      <DependentUpon>DisplaySeriesSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FieldSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FieldSelectionDialog.Designer.cs">
+      <DependentUpon>FieldSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\InputDialog.cs" />
+    <Compile Include="Displays\Delegates.cs" />
+    <Compile Include="Displays\DisplayBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Displays\DisplayBase.Designer.cs">
+      <DependentUpon>DisplayBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Displays\DisplayController.cs" />
+    <Compile Include="Displays\DisplayInfo.cs" />
+    <Compile Include="Displays\DisplaySeries.cs" />
+    <Compile Include="Displays\DisplaySeriesLine.cs" />
+    <Compile Include="Displays\DisplayType.cs" />
+    <Compile Include="Displays\IDisplayController.cs" />
+    <Compile Include="Displays\ITelemetryDisplay.cs" />
+    <Compile Include="Displays\ITelemetryLapDisplay.cs" />
+    <Compile Include="Internal\AxisPrintCoordinates.cs" />
+    <Compile Include="Internal\LineGraphHelper.cs" />
+    <Compile Include="Internal\LineGraphValues.cs" />
+    <Compile Include="LapTimeDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LapTimeDisplay.Designer.cs">
+      <DependentUpon>LapTimeDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LineGraph.Designer.cs">
+      <DependentUpon>LineGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LineGraphDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LineGraphDisplay.Designer.cs">
+      <DependentUpon>LineGraphDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArrayIndex.cs" />
+    <Compile Include="Models\AxisPosition.cs" />
+    <Compile Include="Models\Default\BrakeLineGraphSeries.cs" />
+    <Compile Include="Models\Default\RpmLineGraphSeries.cs" />
+    <Compile Include="Models\Default\SteeringLineGraphSeries.cs" />
+    <Compile Include="Models\Default\ThrottleLineGraphSeries.cs" />
+    <Compile Include="Models\ILineGraphModel.cs" />
+    <Compile Include="Models\ILineGraphSeries.cs" />
+    <Compile Include="Models\ILineGraphValues.cs" />
+    <Compile Include="Models\ILineGraphYAxis.cs" />
+    <Compile Include="Models\LineGraphAxis.cs" />
+    <Compile Include="Models\LineGraphModel.cs" />
+    <Compile Include="Models\LineGraphSeries.cs" />
+    <Compile Include="Models\SummaryColumnFlags.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Displays\ITelemetryFrameDisplay.cs" />
+    <Compile Include="Displays\TelemetryFrameDisplayBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Displays\TelemetryFrameDisplayBase.Designer.cs">
+      <DependentUpon>TelemetryFrameDisplayBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Displays\TelemetryLapDisplayBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Displays\TelemetryLapDisplayBase.Designer.cs">
+      <DependentUpon>TelemetryLapDisplayBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GroupingEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GroupingEditor.Designer.cs">
+      <DependentUpon>GroupingEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MarginsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MarginsEditor.Designer.cs">
+      <DependentUpon>MarginsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeriesEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SeriesEditor.Designer.cs">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeriesEditorBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SeriesEditorBase.Designer.cs">
+      <DependentUpon>SeriesEditorBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SummaryColumnEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SummaryColumnEditor.Designer.cs">
+      <DependentUpon>SummaryColumnEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\YAxisEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\YAxisEditor.Designer.cs">
+      <DependentUpon>YAxisEditor.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HistogramGraph.resx">
+      <DependentUpon>HistogramGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelemetryLineGraph.resx">
+      <DependentUpon>TelemetryLineGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DisplaySeriesSettings.resx">
+      <DependentUpon>DisplaySeriesSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FieldSelectionDialog.resx">
+      <DependentUpon>FieldSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Displays\DisplayBase.resx">
+      <DependentUpon>DisplayBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LapTimeDisplay.resx">
+      <DependentUpon>LapTimeDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineGraph.resx">
+      <DependentUpon>LineGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LineGraphDisplay.resx">
+      <DependentUpon>LineGraphDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Views\GroupingEditor.resx">
+      <DependentUpon>GroupingEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MarginsEditor.resx">
+      <DependentUpon>MarginsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SeriesEditor.resx">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SeriesEditorBase.resx">
+      <DependentUpon>SeriesEditorBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SummaryColumnEditor.resx">
+      <DependentUpon>SummaryColumnEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\YAxisEditor.resx">
+      <DependentUpon>YAxisEditor.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iRacing.Common\iRacing.Common.csproj">
+      <Project>{6E3A441F-52ED-470C-A433-BFD2F31A6B0B}</Project>
+      <Name>iRacing.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.TelemetryFile\iRacing.TelemetryFile.csproj">
+      <Project>{f3dbcde3-1367-41c5-bd12-8e4a556477ef}</Project>
+      <Name>iRacing.TelemetryFile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

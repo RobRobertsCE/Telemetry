@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB7935C3-579E-45A4-9D01-AF24AF695389}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>iRacing.Telemetry.Graphing</RootNamespace>
+    <AssemblyName>iRacing.Telemetry.Graphing</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\TelemetryLineGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TelemetryLineGraph.Designer.cs">
+      <DependentUpon>TelemetryLineGraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\LineGraphHelper.cs" />
+    <Compile Include="Models\ILineGraphModel.cs" />
+    <Compile Include="Models\ILineGraphYAxis.cs" />
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\AxisPrintCoordinates.cs" />
+    <Compile Include="Models\ArrayIndex.cs" />
+    <Compile Include="Models\AxisPosition.cs" />
+    <Compile Include="Models\Default\BrakeLineGraphSeries.cs" />
+    <Compile Include="Models\Default\BrakeYAxis.cs" />
+    <Compile Include="Models\Default\RpmLineGraphSeries.cs" />
+    <Compile Include="Models\Default\RpmYAxis.cs" />
+    <Compile Include="Models\Default\SteeringLineGraphSeries.cs" />
+    <Compile Include="Models\Default\SteeringYAxis.cs" />
+    <Compile Include="Models\Default\ThrottleLineGraphSeries.cs" />
+    <Compile Include="Models\Default\ThrottleYAxis.cs" />
+    <Compile Include="Models\ILineGraphSeries.cs" />
+    <Compile Include="Models\ILineGraphValues.cs" />
+    <Compile Include="Models\LineGraphAxis.cs" />
+    <Compile Include="Models\LineGraphModel.cs" />
+    <Compile Include="Internal\LineGraphValues.cs" />
+    <Compile Include="Models\LineGraphSeries.cs" />
+    <Compile Include="Models\LineGraphXAxis.cs" />
+    <Compile Include="Models\LineGraphYAxis.cs" />
+    <Compile Include="Models\SummaryColumnFlags.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\GroupingEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GroupingEditor.Designer.cs">
+      <DependentUpon>GroupingEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeriesEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SeriesEditor.Designer.cs">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeriesEditorBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SeriesEditorBase.Designer.cs">
+      <DependentUpon>SeriesEditorBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\YAxisEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\YAxisEditor.Designer.cs">
+      <DependentUpon>YAxisEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\TelemetryLineGraph.resx">
+      <DependentUpon>TelemetryLineGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\GroupingEditor.resx">
+      <DependentUpon>GroupingEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SeriesEditor.resx">
+      <DependentUpon>SeriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SeriesEditorBase.resx">
+      <DependentUpon>SeriesEditorBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\YAxisEditor.resx">
+      <DependentUpon>YAxisEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

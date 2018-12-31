@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{275E05A9-01A1-4065-9253-9687BD83FEC2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iRacing.Telemetry.Windows</RootNamespace>
+    <AssemblyName>iRacing.Telemetry.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Infragistics4.Win.UltraWinChart.v14.2, Version=14.2.20142.2092, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Console.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Debug, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Debug.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.1.0.0\lib\net45\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnitsNet, Version=3.110.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnitsNet.3.110.0\lib\net40\UnitsNet.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.5.3.0\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\DisplayInfoService.cs" />
+    <Compile Include="Adapters\ProjectFactory.cs" />
+    <Compile Include="Adapters\SessionFactory.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Models\CloseWindowRequestEventArgs.cs" />
+    <Compile Include="Models\DialogResultEventArgs.cs" />
+    <Compile Include="Models\FieldConversionTypes.cs" />
+    <Compile Include="Models\FileDialogRequestEventArgs.cs" />
+    <Compile Include="Models\IProject.cs" />
+    <Compile Include="Models\ISession.cs" />
+    <Compile Include="Models\LapView.cs" />
+    <Compile Include="AppState.cs" />
+    <Compile Include="Models\MruMenu.cs" />
+    <Compile Include="Models\TelemetryAppStateChangedEventArgs.cs" />
+    <Compile Include="Ports\IDisplayInfoService.cs" />
+    <Compile Include="Ports\IProjectFactory.cs" />
+    <Compile Include="Ports\ISessionFactory.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceCollectionExtensions.cs" />
+    <Compile Include="Models\ITelemetryForm.cs" />
+    <Compile Include="Views\Displays\HistogramDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\HistogramDisplay.Designer.cs">
+      <DependentUpon>HistogramDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Displays\SessionDetailsDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\SessionDetailsDisplay.Designer.cs">
+      <DependentUpon>SessionDetailsDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Displays\SetupDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\SetupDisplay.Designer.cs">
+      <DependentUpon>SetupDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Displays\TrackMapDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\TrackMapDisplay.Designer.cs">
+      <DependentUpon>TrackMapDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FieldDefinitionsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FieldDefinitionsView.Designer.cs">
+      <DependentUpon>FieldDefinitionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FunctionsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FunctionsView.Designer.cs">
+      <DependentUpon>FunctionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Displays\LapTimesDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\LapTimesDisplay.Designer.cs">
+      <DependentUpon>LapTimesDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OptionsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\OptionsView.Designer.cs">
+      <DependentUpon>OptionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bases\MdiChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adapters\ViewController.cs" />
+    <Compile Include="Models\FrameIndexChangeRequestEventArgs.cs" />
+    <Compile Include="Models\LapNumberChangeRequestEventArgs.cs" />
+    <Compile Include="Models\NewChildWindowRequestEventArgs.cs" />
+    <Compile Include="Models\IMdiChildForm.cs" />
+    <Compile Include="Models\IMdiParentForm.cs" />
+    <Compile Include="Views\Bases\MdiChildForm.Designer.cs">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bases\MdiParentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Bases\MdiParentForm.designer.cs">
+      <DependentUpon>MdiParentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\TelemetrySession.cs" />
+    <Compile Include="Views\Bases\TelemetryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Bases\TelemetryForm.Designer.cs">
+      <DependentUpon>TelemetryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ports\IViewController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\TrackMapBuilderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TrackMapBuilderView.Designer.cs">
+      <DependentUpon>TrackMapBuilderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Displays\WaveformDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Displays\WaveformDisplay.Designer.cs">
+      <DependentUpon>WaveformDisplay.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iRacing.Common\iRacing.Common.csproj">
+      <Project>{6E3A441F-52ED-470C-A433-BFD2F31A6B0B}</Project>
+      <Name>iRacing.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.Telemetry.Controls\iRacing.Telemetry.Controls.csproj">
+      <Project>{8af86a24-d5ef-4cb6-b7cd-689eec3c3f5f}</Project>
+      <Name>iRacing.Telemetry.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.Telemetry.Data\iRacing.Telemetry.Data.csproj">
+      <Project>{ea6b2147-d5e5-4cb9-ad65-ff2e89d2055f}</Project>
+      <Name>iRacing.Telemetry.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.Telemetry.Maps\iRacing.Telemetry.Maps.csproj">
+      <Project>{9ffc0f48-4684-4c70-ac90-f7ff68a854c4}</Project>
+      <Name>iRacing.Telemetry.Maps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.TelemetryFile\iRacing.TelemetryFile.csproj">
+      <Project>{f3dbcde3-1367-41c5-bd12-8e4a556477ef}</Project>
+      <Name>iRacing.TelemetryFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.TelemetrySessions\iRacing.TelemetrySessions.csproj">
+      <Project>{767796a5-966e-43e9-8bda-aa6da90a4422}</Project>
+      <Name>iRacing.TelemetrySessions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iRacing.Telemetry\iRacing.Telemetry.csproj">
+      <Project>{94d2803c-a79a-4b46-be53-3dcbdb5d7c3e}</Project>
+      <Name>iRacing.Telemetry</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Bases\TelemetryForm.resx">
+      <DependentUpon>TelemetryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Displays\HistogramDisplay.resx">
+      <DependentUpon>HistogramDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Displays\SessionDetailsDisplay.resx">
+      <DependentUpon>SessionDetailsDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Displays\TrackMapDisplay.resx">
+      <DependentUpon>TrackMapDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Displays\WaveformDisplay.resx">
+      <DependentUpon>WaveformDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FieldDefinitionsView.resx">
+      <DependentUpon>FieldDefinitionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FunctionsView.resx">
+      <DependentUpon>FunctionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Displays\LapTimesDisplay.resx">
+      <DependentUpon>LapTimesDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OptionsView.resx">
+      <DependentUpon>OptionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Bases\MdiChildForm.resx">
+      <DependentUpon>MdiChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Bases\MdiParentForm.resx">
+      <DependentUpon>MdiParentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TrackMapBuilderView.resx">
+      <DependentUpon>TrackMapBuilderView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_6519.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy_6524.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cut_6523.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste_6520.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_6530.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Saveall_6518.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveFileDialogControl_703.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clearallrequests_8816.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewBuildDefinition_8952.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open_6529.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_65191.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OpenFileDialog_692.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CloseResults_8579.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveSelection_5630.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplitScreenHorizontally_12972.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SplitScreenVertically_12973.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Query_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrange_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PropertyIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProcessWindow_6545_32.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FieldsHeader_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Timer_709.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Launch_7018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PieSeries_12653.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackedAreaSeries_12693.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackedBarSeries_12694.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackedColumnSeries_12695.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bullets_11690.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSeries_12630.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\asset_treeView_12x12_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MapTileLayer_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MasterPage_6478_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DatabaseProject_7342_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GotoFirstRow_287_32.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GotoLastRow_288_32.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataContainer_MoveFirstHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataContainer_MoveLastHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataContainer_MoveNextHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataContainer_MovePreviousHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\command_link_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom_5442.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut_12927.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomToWidth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base_bars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base_charts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base_cog_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base_gauge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Function_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waveform.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear_32xSM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph_highPerformanceComputingChart_5170_32xSM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph_performanceChart_5171_16x_LG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guage_32xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\process_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RSReport_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screwdriver_32xMD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EllipseElement_10707.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FindResults1_6264.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FilteredObject_13400_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Play_32xMD_color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5-Bristol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveFormDesignHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OpenSelectedItemHS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewFile_6276_32.bmp" />
+    <None Include="Resources\077_AddFile_24x24_72.png" />
+    <Content Include="Views\Displays\OxyPlot waveform class.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
